@@ -1,11 +1,14 @@
 {
   "name": "taskmanager",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev -- --host 127.0.0.1 --port 4173\"",
+    "postinstall": "npm --prefix frontend install && npm --prefix backend install",
+    "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
     "dev:backend": "npm --prefix backend run dev",
-    "dev:frontend": "npm --prefix frontend run dev -- --host 127.0.0.1 --port 4173",
-    "build": "npm --prefix frontend run build"
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm run build && node backend/server.js"
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
